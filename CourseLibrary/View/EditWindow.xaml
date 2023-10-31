@@ -1,0 +1,72 @@
+﻿<Window x:Class="CourseLibrary.View.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseLibrary.ViewModel"
+        mc:Ignorable="d"
+        Title="Book" Height="450" Width="725">
+    <Window.DataContext>
+        <local:MainWindowViewModel></local:MainWindowViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate x:Key="BooksItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding ImageData}" Width="100" Height="100" Stretch="Fill" VerticalAlignment="Center" />
+                <TextBlock Margin="10, 40, 10, 40" Padding="1px">
+                <Run Text="{Binding Title}" FontSize="14" FontWeight="Bold" BaselineAlignment="Center"/>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        
+        
+        <ListBox Grid.Column="0" ItemsSource="{Binding Books}" 
+        Name="LibraryList" ItemTemplate="{StaticResource BooksItemTemplate}"
+        SelectedItem="{Binding SelectedBook, UpdateSourceTrigger=PropertyChanged}"
+        />
+
+        <StackPanel Margin="10px" Grid.Column="1">
+            <Label FontWeight="Bold">Title</Label>
+            <TextBox Margin="0,0,0,5"
+             Text="{Binding SelectedBook.Title}"/>
+
+            <Label FontWeight="Bold">Genre</Label>
+            <ComboBox Margin="0,0,0,5"
+              ItemsSource="{Binding gengres}"
+              Text="{Binding SelectedBook.Gengre}"/>
+
+            <Label FontWeight="Bold">Author</Label>
+            <TextBox Margin="0,0,0,5" 
+             Text="{Binding SelectedBook.Author}"/>
+
+            <Label FontWeight="Bold">Release Date</Label>
+            <DatePicker Margin="0,0,0,5"
+                SelectedDate="{Binding SelectedBook.ReleaseDate}"/>
+
+            <Label FontWeight="Bold">Price</Label>
+            <TextBox Margin="0,0,0,5"
+             Text="{Binding SelectedBook.Price}"/>
+
+            <Label FontWeight="Bold">Description</Label>
+            <TextBox Margin="0,0,0,5"
+             Text="{Binding SelectedBook.Description}"/>
+
+            <Label FontWeight="Bold">Image</Label>
+            <Button Margin="0,0,0,10" Command="{Binding EditSelectImageCommand}">Select Image</Button>
+
+            <Button Height="30px" Command="{Binding EditBookCommand}" CommandParameter="{Binding SelectedBook}" Click="Button_Click">OK</Button>
+        </StackPanel>
+
+    </Grid>
+
+
+
+</Window>

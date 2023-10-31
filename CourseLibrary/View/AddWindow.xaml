@@ -1,0 +1,45 @@
+﻿<Window x:Class="CourseLibrary.View.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CourseLibrary.ViewModel"
+        mc:Ignorable="d"
+        Title="Book" Height="450" Width="320">
+    <Window.DataContext>
+        <local:MainWindowViewModel></local:MainWindowViewModel>
+    </Window.DataContext>
+
+    <StackPanel Margin="10px">
+        <Label FontWeight="Bold">Title</Label>
+        <TextBox Margin="0,0,0,5"
+                 Text="{Binding CurrentBook.Title}"/>
+
+        <Label FontWeight="Bold">Genre</Label>
+        <ComboBox Margin="0,0,0,5"
+                  ItemsSource="{Binding gengres}"
+                  Text="{Binding CurrentBook.Gengre}"/>
+
+        <Label FontWeight="Bold">Author</Label>
+        <TextBox Margin="0,0,0,5" 
+                 Text="{Binding CurrentBook.Author}"/>
+        
+        <Label FontWeight="Bold">Release Date</Label>
+        <DatePicker Margin="0,0,0,5"
+                    SelectedDate="{Binding CurrentBook.ReleaseDate}"/>
+
+        <Label FontWeight="Bold">Price</Label>
+        <TextBox Margin="0,0,0,5"
+                 Text="{Binding CurrentBook.Price}"/>
+
+        <Label FontWeight="Bold">Description</Label>
+        <TextBox Margin="0,0,0,5"
+                 Text="{Binding CurrentBook.Description}"/>
+
+        <Label FontWeight="Bold">Image</Label>
+        <Button Margin="0,0,0,10" Command="{Binding AddSelectImageCommand}">Select Image</Button>
+
+        <Button Height="30px" Command="{Binding AddBookCommand}" Click="Button_Click">OK</Button>
+    </StackPanel>
+    
+</Window>
